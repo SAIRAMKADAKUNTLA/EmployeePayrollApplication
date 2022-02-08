@@ -19,4 +19,13 @@ public class EmployeePayrollData {
         this.name = payrollDTO.name;
         this.salary = payrollDTO.salary;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeePayrollData{" +
+                "employeeId=" + employeeId +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
