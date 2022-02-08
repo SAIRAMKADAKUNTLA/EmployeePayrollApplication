@@ -2,10 +2,12 @@ package com.bridgelabz.employeepayrollapps.service;
 
 import com.bridgelabz.employeepayrollapps.dto.EmployeePayrollDTO;
 import com.bridgelabz.employeepayrollapps.model.EmployeePayrollData;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EmployeePayrollService implements IEmployeePayrollService{
     List<EmployeePayrollData>payrollData=new ArrayList<>();
 
@@ -19,11 +21,11 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     }
 
     @Override
-    public List<EmployeePayrollData> createEmployeePayroll(EmployeePayrollDTO payrollDTO) {
-        EmployeePayrollData employeepayrollData=null;
-        employeepayrollData=new EmployeePayrollData(1,payrollDTO);
-        payrollData.add(employeepayrollData);
-        return payrollData;
+    public EmployeePayrollData createEmployeePayroll(EmployeePayrollDTO payrollDTO) {
+        EmployeePayrollData empData=null;
+        empData=new EmployeePayrollData(payrollData.size()+1,payrollDTO);
+        payrollData.add(empData);
+        return empData;
     }
 
     @Override
