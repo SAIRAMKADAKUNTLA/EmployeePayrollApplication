@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 @RestController
@@ -17,7 +16,9 @@ import java.util.List;
 public class EmployeePayrollController {
 
 
+    @Autowired
     private IEmployeePayrollService service;
+
     @RequestMapping(value={"","/","/get"})
     public ResponseEntity<ResponseDTO> getEmployeePayrollData()
     {
@@ -39,14 +40,14 @@ public class EmployeePayrollController {
     }
     @PutMapping("/edit/{empId}")
     public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,@RequestBody EmployeePayrollDTO payrollDTO) {
-        List<EmployeePayrollData> payrollData=service.updateEmployeePayroll(empId,payrollDTO);
+        EmployeePayrollData payrollData=service.updateEmployeePayroll(empId,payrollDTO);
         ResponseDTO responseDTO=new ResponseDTO("edited successfully",payrollData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{empId}")
     public  ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId){
-        EmployeePayrollData deleteEmployeePayroll=service.deleteEmployeePayroll(empId);
-        ResponseDTO responseDTO=new ResponseDTO("deleted successfully",deleteEmployeePayroll);
+        service.deleteEmployeePayroll(empId);
+        ResponseDTO responseDTO=new ResponseDTO("deleted successfully",+empId);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 }
